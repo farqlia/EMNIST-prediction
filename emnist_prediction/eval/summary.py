@@ -36,7 +36,7 @@ def print_summary(report, f1_score_column, threshold_value=None):
           f"{report.loc[list(maj_labels_above_mean), f1_score_column].mean():.3f}")
 
 def plot_distributions(report, *f1_score_columns):
-    plt.figure(figsize=(7, 7))
+    plt.figure(figsize=(10, 7))
     sorted_class_labels = report.sort_index().index
     ax = sns.barplot(data=report[['train_class_prob', *f1_score_columns]].reset_index().melt(
         value_vars=['train_class_prob', *f1_score_columns], id_vars=['index']), y='value',
@@ -48,7 +48,7 @@ def plot_distributions(report, *f1_score_columns):
 
 
 def plot_f1_vs_class_prob(report, *f1_score_columns):
-    plt.figure(figsize=(7, 7))
+    plt.figure(figsize=(10, 7))
     sns.relplot(
         data=report[['train_class_prob', *f1_score_columns]].melt(value_vars=f1_score_columns, id_vars=['train_class_prob']),
         y='train_class_prob',
