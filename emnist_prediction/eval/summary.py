@@ -38,9 +38,10 @@ def print_summary(report, f1_score_column, threshold_value=None):
 def plot_distributions(report, *f1_score_columns):
     plt.figure(figsize=(7, 7))
     sorted_class_labels = report.sort_index().index
-    sns.barplot(data=report[['train_class_prob', *f1_score_columns]].reset_index().melt(
+    ax = sns.barplot(data=report[['train_class_prob', *f1_score_columns]].reset_index().melt(
         value_vars=['train_class_prob', *f1_score_columns], id_vars=['index']), y='value',
                 x='index', order=sorted_class_labels, hue='variable')
+    sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1))
     plt.ylabel('Value')
     plt.xlabel('Letter')
     _ = plt.title('Distribution of class prob and f1')
