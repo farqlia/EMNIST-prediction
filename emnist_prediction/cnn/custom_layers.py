@@ -4,13 +4,13 @@ import torch.nn as nn
 class CustomConv2d(nn.Module):
 
     def __init__(self, n_channels_in, n_channels_out, kernel_size, pad,
-                 use_pooling=False, stride=1, drop=None, batch_norm=True,
+                 pooling=None, stride=1, drop=None, batch_norm=True,
                  activ=nn.ReLU):
         super(CustomConv2d, self).__init__()
         layers = [nn.Conv2d(n_channels_in, n_channels_out, kernel_size, stride=stride,
                             padding=pad)]
-        if use_pooling:
-            layers.append(nn.MaxPool2d(kernel_size=kernel_size))
+        if pooling:
+            layers.append(nn.MaxPool2d(kernel_size=pooling))
         if activ:
             layers.append(activ())
         if batch_norm:
