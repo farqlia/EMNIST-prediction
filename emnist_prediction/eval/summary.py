@@ -14,8 +14,8 @@ def print_summary(report, f1_score_column, threshold_value=None):
     f1_baseline_below_mean = report[report[f1_score_column] < mean_f1_baseline]
     class_prob_below_mean = report[report['train_class_prob'] < threshold_value]
 
-    print("Classes with f1 score BELOW mean\n", f1_baseline_below_mean[[f1_score_column, 'train_class_prob']])
-    print("Classes with probability BELOW threshold\n", class_prob_below_mean[[f1_score_column, 'train_class_prob']])
+    print("Classes with f1 score BELOW mean\n", f1_baseline_below_mean[[f1_score_column, 'train_class_prob']].round(3))
+    print("Classes with probability BELOW threshold\n", class_prob_below_mean[[f1_score_column, 'train_class_prob']].round(3))
 
     min_labels_below_mean = set(f1_baseline_below_mean.index) & set(class_prob_below_mean.index)
 
